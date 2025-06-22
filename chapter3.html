@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الفصل الثالث - عودة المشاعر</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #eafaf1;
+      color: #333;
+      text-align: center;
+      padding: 30px;
+    }
+    /* حاوية flex للعنوان والصورة */
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .header-image {
+      width: 100px;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(131, 157, 141, 0.7);
+    }
+    .container {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 80%;
+    }
+    .memory {
+      display: none;
+      margin-top: 30px;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+    <h1>الفصل الثالث: رجوع القلب 🕊️</h1>
+    <img
+      class="header-image"
+      src="https://i.postimg.cc/FsPCwB4s/Whats-App-Image-2025-06-22-at-19-18-54-c64480c5.jpg"
+      alt="صورة صغيرة"
+    />
+  </div>
+
+  <div id="game"></div>
+
+  <script>
+    const questions = [
+      {
+        title: "مرحلة 14: بداية جديدة؟",
+        question: "مين اللي قربت منه بعد الفركشة؟",
+        options: ["رودينا", "لولو", "منة"],
+        answer: "لولو",
+        memory: "بعد شهور من البعد، اتعرفت على لولو، وكنتم قرّبتوا من بعض جدًا.. لكن القلب لسه هناك."
+      },
+      {
+        title: "مرحلة 15: خطوبة واختبار",
+        question: "فين شفت رقيه أول مرة بعد الفركشة؟",
+        options: ["في الجامعة", "في خطوبة أخت رودينا", "في حفلة"],
+        answer: "في خطوبة أخت رودينا",
+        memory: "شفتها تاني في خطوبة أخت رودينا، ورغم وجود لولو، مشاعرك اتحركت تاني."
+      },
+      {
+        title: "مرحلة 16: المكالمة",
+        question: "إيه اللي حصل بعد ما اتكلمتوا في الزمالك؟",
+        options: ["رجعتوا لبعض", "فضلتوا صحاب بس", "قطعتم الاتصال"],
+        answer: "رجعتوا لبعض",
+        memory: "في الزمالك، فهمتوا بعض أكتر.. ودي كانت لحظة قرار ترجعوا لبعض بحب أقوى."
+      },
+      {
+        title: "مرحلة 17: آخر مشكلة",
+        question: "إيه اللي حصل بعد ما فركشتوا تاني؟",
+        options: ["خلصت العلاقة", "رجعت صلحتها", "كل واحد كمل طريقه"],
+        answer: "رجعت صلحتها",
+        memory: "رغم الزعل، محبتش تستسلم.. نزلت، صلحتها، وجبتلها بطة ♥️"
+      },
+      {
+        title: "مرحلة 18: النهاية المفتوحة",
+        question: "إنت حاسس بإيه دلوقتي؟",
+        options: ["انتهت القصة", "لسه بحبها", "مش متأكد"],
+        answer: "لسه بحبها",
+        memory: "لسه بتحبها، ولسه شايف إنكوا هتتجوزوا إن شاء الله.. والقصة مكملتش لسه."
+      }
+    ];
+
+    const gameContainer = document.getElementById("game");
+
+    questions.forEach((q) => {
+      const container = document.createElement("div");
+      container.className = "container";
+
+      const title = document.createElement("h2");
+      title.textContent = q.title;
+      container.appendChild(title);
+
+      const questionText = document.createElement("p");
+      questionText.textContent = q.question;
+      container.appendChild(questionText);
+
+      const select = document.createElement("select");
+      q.options.forEach(option => {
+        const opt = document.createElement("option");
+        opt.value = option;
+        opt.textContent = option;
+        select.appendChild(opt);
+      });
+      container.appendChild(select);
+
+      const button = document.createElement("button");
+      button.textContent = "تحقق";
+      container.appendChild(button);
+
+      const memoryDiv = document.createElement("div");
+      memoryDiv.className = "memory";
+      const memoryText = document.createElement("p");
+      memoryText.textContent = q.memory;
+      memoryDiv.appendChild(memoryText);
+      container.appendChild(memoryDiv);
+
+      button.addEventListener("click", () => {
+        if (select.value === q.answer) {
+          memoryDiv.style.display = "block";
+        } else {
+          alert("إجابة مش صحيحة.. جرب تاني ♥");
+        }
+      });
+
+      gameContainer.appendChild(container);
+    });
+  </script>
+
+  <div style="margin-top: 40px;">
+    <a href="chapter4.html">
+      <button style="padding: 12px 24px; font-size: 18px; border-radius: 12px; background-color: #d1f2eb; border: none; cursor: pointer;">
+      الفصل الرابع ➡️
+      </button>
+    </a>
+  </div>
+</body>
+</html>

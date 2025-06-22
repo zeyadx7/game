@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>الفصل الأول - بداية القصة</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom right, #ffe0f0, #fad0c4);
+      color: #3e2723;
+      text-align: center;
+      padding: 30px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* حاوية flex للعنوان والصورة */
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      font-size: 30px;
+      background-color: #fa669a;
+      height: 7vh;
+      border-radius: 45px;
+      padding: 10px 30px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      white-space: nowrap;
+    }
+
+    /* حجم الصورة أكبر شويه */
+    .header-image {
+      width: 120px;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(250, 102, 154, 0.7);
+    }
+
+    .container {
+      position: relative;
+      background: rgba(250, 152, 221, 0.95);
+      border-radius: 45px;
+      padding: 25px;
+      max-width: 650px;
+      margin: auto;
+      margin-bottom: 45px;
+      z-index: 1;
+      box-shadow: 20px 20px 20px rgba(240, 8, 174, 0.1);
+    }
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -4px; left: -4px;
+      width: calc(100% + 8px);
+      height: calc(100% + 8px);
+      border-radius: 45px;
+      background: linear-gradient(270deg, #ff85b3, #ffe0f0, #ff85b3);
+      background-size: 400% 400%;
+      animation: borderMove 6s linear infinite;
+      z-index: -1;
+    }
+    @keyframes borderMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+      color: #880e4f;
+    }
+    
+    .container p {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #c97c70;
+    }
+    .container:hover{
+        box-shadow: 0 0 20px rgba(240, 8, 174, 0.3);
+        transform: scale(1.02);
+        transition: transform 0.4s ease-in-out, box-shadow 0.3s ease;
+    }
+
+    select, button {
+        padding: 14px;
+        font-size: 1.1em;
+        margin-top: 10px;
+        border-radius: 12px;
+        border: 1px solid #ccc;
+        width: 85%;
+
+    }
+
+    button {
+        background-color: #f48fb1;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+    background-color: #ec407a;
+    }
+
+    .memory {
+        display: none;
+        margin-top: 30px;
+        animation: fadeIn 1s ease forwards;
+        background-color: #fff3f6;
+        padding: 15px;
+        border-radius: 45px;
+        color: #880e4f;
+        border: 1px solid #ff0b61;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    .heart {
+      position: absolute;
+      top: -30px;
+      font-size: 24px;
+      color: #ff4d6d;
+      animation: fall 3s linear forwards;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* إخفاء مشغل الموسيقى */
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header-container">
+    <h1>💞 الفصل الأول: أول لحظة حب 💞</h1>
+    <img 
+      class="header-image" 
+      src="https://i.postimg.cc/90RJGWD4/Whats-App-Image-2025-06-22-at-19-18-43-9bbd1858.jpg" 
+      alt="صورة صغيرة" 
+    />
+  </div>
+
+<audio id="dingSound" src="https://www.myinstants.com/media/sounds/notification-sound.mp3"></audio>
+
+  <div id="game"></div>
+
+  <script>
+    const questions = [
+      {
+        title: "🌸 مرحلة 1: أول نظرة",
+        question: "فين شفت رقيه لأول مرة؟",
+        options: ["في وسط البلد", "في الجامعة", "في الكافيه"],
+        answer: "في الجامعة",
+        memory: "كانت أول مرة تشوفها في الجامعة، عنيها كانت بتلمع، ومفيش أجمل من ضحكتها."
+      },
+      {
+        title: "💬 مرحلة 2: الاعتراف",
+        question: "اعترفت بإعجابك برقيه لمين؟",
+        options: ["رقيه", "رودينا", "صحابي"],
+        answer: "رودينا",
+        memory: "حكيت لرودينا إن قلبك بدأ يدق كل مرة تشوف فيها رقيه، وكان واضح إنك واقع."
+      },
+      {
+        title: "🕊 مرحلة 3: أول محاولة حب",
+        question: "إزاي اعترفت بحبك لرقيه؟",
+        options: ["في الجامعة", "على واتساب", "في كافيه"],
+        answer: "على واتساب",
+        memory: "وانت في أقدس مكان، في العمرة، مقدرتش تكتم مشاعرك، وكتبتلها: بحبك."
+      },
+      {
+        title: "💔 مرحلة 4: الرد",
+        question: "كان رد رقيه إيه لما اعترفتلها؟",
+        options: ["وافقت فوراً", "قالت مش جاهزة", "قالت بتحبك"],
+        answer: "قالت مش جاهزة",
+        memory: "رغم إنها قالت مش جاهزة، بس حسيت إن فيه شعاع أمل بيقول لسه في فرصة."
+      },
+      {
+        title: "👨‍👩‍👧 مرحلة 5: أول لقاء رسمي",
+        question: "قابلت والدها إمتى؟",
+        options: ["أول أسبوع رمضان", "تالت أسبوع رمضان", "بعد العيد"],
+        answer: "تالت أسبوع رمضان",
+        memory: "قابلت والدها في ليلة رمضانية هادية، والقلوب كانت مليانة توتر وأمل."
+      },
+      {
+        title: "❤ مرحلة 6: أول 'بحبك' منها",
+        question: "إزاي قالتلك إنها بتحبك؟",
+        options: ["قالتها صراحة", "ردت على سؤالك في التليفون", "بعتتلك رسالة"],
+        answer: "ردت على سؤالك في التليفون",
+        memory: "رنيت عليها وسألتها: بتحبيني؟ سكتت لحظة، وبعدين قالت: آه.. وكأن الدنيا وقفت لحظة."
+      }
+    ];
+
+    const gameContainer = document.getElementById("game");
+
+    function dropHearts() {
+      for (let i = 0; i < 12; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 15 + 20) + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    }
+
+    questions.forEach((q) => {
+      const container = document.createElement("div");
+      container.className = "container";
+
+      const title = document.createElement("h2");
+      title.textContent = q.title;
+      container.appendChild(title);
+
+      const questionText = document.createElement("p");
+      questionText.textContent = q.question;
+      container.appendChild(questionText);
+
+      const select = document.createElement("select");
+      q.options.forEach(option => {
+        const opt = document.createElement("option");
+        opt.value = option;
+        opt.textContent = option;
+        select.appendChild(opt);
+      });
+      container.appendChild(select);
+
+      const button = document.createElement("button");
+      button.textContent = "تحقق";
+      container.appendChild(button);
+
+      const memoryDiv = document.createElement("div");
+      memoryDiv.className = "memory";
+      const memoryText = document.createElement("p");
+      memoryText.textContent = q.memory;
+      memoryDiv.appendChild(memoryText);
+      container.appendChild(memoryDiv);
+
+      button.addEventListener("click", () => {
+        if (select.value === q.answer) {
+          memoryDiv.style.display = "block";
+          dropHearts();
+          document.getElementById("dingSound").play();
+        } else {
+          alert("إجابة مش صحيحة.. جرب تاني 💘");
+        }
+      });
+
+      gameContainer.appendChild(container);
+    });
+  </script>
+
+  <div style="margin-top: 40px;">
+    <a href="chapter2.html">
+      <button style="width:300px;padding: 14px 28px; font-size: 18px; border-radius: 45px; background-color: #d40d52; color: white; border: none; cursor: pointer;">
+        الفصل الثاني ➡
+      </button>
+    </a>
+  </div>
+</body>
+</html>

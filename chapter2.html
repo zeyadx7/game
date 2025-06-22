@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الفصل الثاني - لعبة ذكريات رقيه</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      text-align: center;
+      padding: 30px;
+    }
+    /* حاوية flex للعنوان والصورة */
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .header-image {
+      width: 130px;
+      height: auto;
+      border-radius: 50%;
+      box-shadow: 0 0 8px rgba(182, 85, 122, 0.7);
+    }
+    .container {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+    select, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 80%;
+    }
+    .memory {
+      display: none;
+      margin-top: 30px;
+      animation: fadeIn 1s ease forwards;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <div class="header-container">
+    <h1>الفصل الثاني: الرجوع بعد البُعد</h1>
+    <img
+      class="header-image"
+      src="https://i.postimg.cc/mksK2zXL/Whats-App-Image-2025-06-22-at-19-55-19-80f09459.jpg"
+      alt="صورة صغيرة"
+    />
+  </div>
+
+  <div id="game"></div>
+
+  <script>
+    const questions = [
+      {
+        title: "مرحلة 9: لحظة المرض",
+        question: "إمتى كلمتها بعد الفركشة؟",
+        options: ["لما تعبت جامد", "بعد شهر", "في الكلية"],
+        answer: "لما تعبت جامد",
+        memory: "مكنش في تواصل خالص، لكن لما تعبت جامد، دخلت تطمن عليها. وكانت فرحانة جدًا إنك لسه فاكرها."
+      },
+      {
+        title: "مرحلة 10: سمر كورس",
+        question: "فين حسيت إنك لسه بتحبها؟",
+        options: ["في المحاضرة", "في عيد ميلادها", "في سمر كورس"],
+        answer: "في سمر كورس",
+        memory: "وقت سمر كورس في الجامعة، شفتها بعين تانية، وحسيت إنك لسه بتحبها وعايزها بأي طريقة."
+      },
+      {
+        title: "مرحلة 11: بعد الجامعة",
+        question: "عملتوا إيه بعد ما اليوم خلص؟",
+        options: ["روحت لوحدي", "قعدنا نهرّج في العربية", "كل واحد راح لحاله"],
+        answer: "قعدنا نهرّج في العربية",
+        memory: "بعد الجامعة، قعدتوا في العربية تهزروا وتضحكوا كأن مفيش أي حاجة فرقتكم قبل كده.. كانت لحظة راجعة من القلب."
+      },
+      {
+        title: "مرحلة 12: عيد ميلادها",
+        question: "عملتلها عيد ميلاد فين؟",
+        options: ["في البيت", "كافيه كيمس", "الجامعة"],
+        answer: "كافيه كيمس",
+        memory: "حضرتلها عيد ميلادها في كافيه كيمس على وصلة دهشور، وكانت مبسوطة جدًا، وجبتلها سلسلة فراشة."
+      },
+      {
+        title: "مرحلة 13: النهاية من تاني",
+        question: "قالتلك إيه لما سألتها عايزة تكملي؟",
+        options: ["محتاجة وقت", "مش عايزة أكمل", "مش عارفة"],
+        answer: "مش عايزة أكمل",
+        memory: "قالتلك بوضوح إنها مش مرتاحة ومش عايزة تكمل، وكانت لحظة زعل حقيقية لأنك كنت متمسك بيها بصدق."
+      }
+    ];
+
+    const gameContainer = document.getElementById("game");
+
+    questions.forEach((q) => {
+      const container = document.createElement("div");
+      container.className = "container";
+
+      const title = document.createElement("h2");
+      title.textContent = q.title;
+      container.appendChild(title);
+
+      const questionText = document.createElement("p");
+      questionText.textContent = q.question;
+      container.appendChild(questionText);
+
+      const select = document.createElement("select");
+      q.options.forEach(option => {
+        const opt = document.createElement("option");
+        opt.value = option;
+        opt.textContent = option;
+        select.appendChild(opt);
+      });
+      container.appendChild(select);
+
+      const button = document.createElement("button");
+      button.textContent = "تحقق";
+      container.appendChild(button);
+
+      const memoryDiv = document.createElement("div");
+      memoryDiv.className = "memory";
+      const memoryText = document.createElement("p");
+      memoryText.textContent = q.memory;
+      memoryDiv.appendChild(memoryText);
+      container.appendChild(memoryDiv);
+
+      button.addEventListener("click", () => {
+        if (select.value === q.answer) {
+          memoryDiv.style.display = "block";
+        } else {
+          alert("إجابة مش صحيحة.. جرب تاني ♥");
+        }
+      });
+
+      gameContainer.appendChild(container);
+    });
+  </script>
+
+  <div style="margin-top: 40px;">
+    <a href="chapter3.html">
+      <button style="padding: 12px 24px; font-size: 18px; border-radius: 12px; background-color: #a3e4d7; border: none; cursor: pointer;">
+        الانتقال للفصل الثالث ➡️
+      </button>
+    </a>
+  </div>
+
+</body>
+</html>
