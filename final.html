@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>رسالة حب</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #f8cdda, #1d2b64);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cairo', sans-serif;
+    color: #fff0f5;
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .container {
+    background: rgba(255, 182, 193, 0.2);
+    padding: 40px 30px;
+    border-radius: 25px;
+    max-width: 600px;
+    box-shadow: 0 0 40px rgba(255, 105, 180, 0.7);
+    position: relative;
+    animation: pulseGlow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 40px rgba(255, 105, 180, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 60px rgba(255, 182, 193, 1);
+    }
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-shadow: 0 0 15px #ff69b4;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #ffe4e1;
+    text-shadow: 0 0 8px #ffb6c1;
+  }
+
+  .heart {
+    position: absolute;
+    font-size: 2.2rem;
+    color: #ff2e63;
+    animation: floatUp 6s linear infinite;
+    user-select: none;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100%) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-150%) scale(1.5);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container" id="messageBox">
+  <h1>رسالة من القلب ❤️</h1>
+  <p>بصّي، أنا مش شاطر في الكلام أوي، بس في حاجات جوايا لازم تتقال.</p>
+  <p>أنا فعلاً بحبك، وده مش من دلوقتي، ده من أول مره شفتك فيها. يومها حسيت إني شوفت حد مختلف، حد قلبي ارتاحله من قبل ما نتكلم حتى. كل لحظة عدت بينا، سواء حلوة أو صعبة، كانت بتأكدلي إنك مش مجرد حد عادي.. إنتي بالنسبالي كل حاجة.</p>
+  <p>اتضايقت؟ آه. تعبنا؟ كتير. بس عمري ما نسيتك، وولا لحظة حبيت فيها حد غيرك بجد. كنتي دايمًا في بالي، وقلبي.</p>
+  <p>أنا بحبك زي ما إنتي، بكل تفاصيلك. ومهما حصل، هفضل دايمًا شايف إنك أغلى وأجمل حاجة حصلتلي. يمكن الدنيا لفت بينا، ويمكن تعبنا، بس أنا عرفت إن قلبي ليكي، ومش هيرتاح غير معاكي.</p>
+  <p>لو رجع بيا الزمن، هختارك من تاني، وهعيش كل لحظة معاكي حتى اللي وجعتني.. علشان كل ده بيقول إنك تستاهلي الحب كله.</p>
+  <p>أنا بحبك بجد، ومش عايز في حياتي غيرك.<br>وإن شاء الله نبقي مع بعض طول العمر ❤️❤️</p>
+</div>
+
+<script>
+  // نضيف قلوب عائمة بشكل عشوائي ومتكرر
+  const container = document.body;
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.textContent = '❤️';
+
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+    heart.style.fontSize = (16 + Math.random() * 24) + 'px';
+
+    container.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 8000);
+  }
+
+  setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>
