@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>الفصل الأول - بداية القصة</title>
   <style>
     body {
@@ -15,70 +15,59 @@
       position: relative;
     }
 
-    /* حاوية flex للعنوان والصورة */
-    .header-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
     h1 {
       font-size: 30px;
+      margin-bottom: 30px;
+      align-items: center;
       background-color: #fa669a;
       height: 7vh;
+      width: 50%;
+      margin-right: 350px;
       border-radius: 45px;
-      padding: 10px 30px;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      white-space: nowrap;
+    padding: 10px;
     }
-
-    /* حجم الصورة أكبر شويه */
-    .header-image {
-      width: 120px;
+       .header-image {
+      width: 150px;
       height: auto;
       border-radius: 50%;
-      box-shadow: 0 0 8px rgba(250, 102, 154, 0.7);
+      box-shadow:0 15px 8px rgba(250, 102, 154, 0.7);
+      margin-bottom: 10px;
     }
+.container {
+  position: relative;
+  background: rgba(250, 152, 221, 0.95);
+  border-radius: 45px;
+  padding: 25px;
+  max-width: 650px;
+  margin: auto;
+  margin-bottom: 45px;
+  z-index: 1;
+  box-shadow: 20px 20px 20px rgba(240, 8, 174, 0.1);
+  
 
-    .container {
-      position: relative;
-      background: rgba(250, 152, 221, 0.95);
-      border-radius: 45px;
-      padding: 25px;
-      max-width: 650px;
-      margin: auto;
-      margin-bottom: 45px;
-      z-index: 1;
-      box-shadow: 20px 20px 20px rgba(240, 8, 174, 0.1);
-    }
-    .container::before {
-      content: '';
-      position: absolute;
-      top: -4px; left: -4px;
-      width: calc(100% + 8px);
-      height: calc(100% + 8px);
-      border-radius: 45px;
-      background: linear-gradient(270deg, #ff85b3, #ffe0f0, #ff85b3);
-      background-size: 400% 400%;
-      animation: borderMove 6s linear infinite;
-      z-index: -1;
-    }
-    @keyframes borderMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .container h2 {
+}
+.container::before {
+  content: '';
+  position: absolute;
+  top: -4px; left: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  border-radius: 45px;
+  background: linear-gradient(270deg, #ff85b3, #ffe0f0, #ff85b3);
+  background-size: 400% 400%;
+  animation: borderMove 6s linear infinite;
+  z-index: -1;
+}
+@keyframes borderMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.container h2 {
       font-size: 24px;
       margin-bottom: 15px;
       color: #880e4f;
-    }
+    } 
     
     .container p {
       font-size: 1.2em;
@@ -116,7 +105,7 @@
     .memory {
         display: none;
         margin-top: 30px;
-        animation: fadeIn 1s ease forwards;
+        animation: fadeIn 1s ease-in-out forwards;
         background-color: #fff3f6;
         padding: 15px;
         border-radius: 45px;
@@ -125,8 +114,12 @@
     }
 
     @keyframes fadeIn {
-      from {opacity: 0;}
-      to {opacity: 1;}
+        from {opacity: 0;}
+        to {opacity: 1;}
+        0% { transform: scale(1); opacity: 0; }
+        60% { transform: scale(1.4); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+   
     }
 
     .heart {
@@ -152,8 +145,7 @@
 </head>
 <body>
 
-  <div class="header-container">
-    <h1>💞 الفصل الأول: أول لحظة حب 💞</h1>
+  <h1>💞 الفصل الأول: أول لحظة حب 💞</h1>
     <img 
       class="header-image" 
       src="https://i.postimg.cc/90RJGWD4/Whats-App-Image-2025-06-22-at-19-18-43-9bbd1858.jpg" 
@@ -162,6 +154,7 @@
   </div>
 
 <audio id="dingSound" src="https://www.myinstants.com/media/sounds/notification-sound.mp3"></audio>
+
 
   <div id="game"></div>
 
@@ -214,12 +207,12 @@
     const gameContainer = document.getElementById("game");
 
     function dropHearts() {
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 32; i++) {
         const heart = document.createElement("div");
         heart.className = "heart";
         heart.textContent = "💖";
         heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = (Math.random() * 15 + 20) + "px";
+        heart.style.fontSize = (Math.random() * 25 + 20) + "px";
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 3000);
       }
@@ -260,11 +253,21 @@
       button.addEventListener("click", () => {
         if (select.value === q.answer) {
           memoryDiv.style.display = "block";
-          dropHearts();
-          document.getElementById("dingSound").play();
+          dropHearts();document.getElementById("dingSound").play();
+
         } else {
-          alert("إجابة مش صحيحة.. جرب تاني 💘");
-        }
+         const errorMsg = document.getElementById("errorMsg");
+            errorMsg.style.display = "block";
+            errorMsg.style.opacity = 1;
+            document.getElementById("errorSound").play();
+            setTimeout(() => {
+            errorMsg.style.opacity = 0;
+            setTimeout(() => {
+                errorMsg.style.display = "none";
+            }, 500);
+            }, 2000);
+
+            } 
       });
 
       gameContainer.appendChild(container);
@@ -278,5 +281,29 @@
       </button>
     </a>
   </div>
+  <div id="errorMsg" style="
+ display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(145deg, #ffdde1, #ee9ca7);
+  color: #5b5858;
+  padding: 20px 30px;
+  font-size: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(255, 105, 135, 0.4);
+  font-weight: bold;
+  z-index: 9999;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+">
+إجابة مش صحيحة.. جرب تاني 💘
+</div>
+<audio id="errorSound" src="https://cdn.pixabay.com/audio/2022/03/15/audio_44b3a8eac4.mp3" preload="auto"></audio>
+
+
 </body>
 </html>
